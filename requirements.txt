@@ -3,5 +3,6 @@ mcp==1.29.0
 google-genai
 google-cloud-bigquery
 google-cloud-bigtable
+pyarrow>=14.0.0
 fastapi
 uvicorn
