@@ -1,0 +1,92 @@
+{
+  "eval_cases": [
+    {
+      "eval_case_id": "uc2_1_parallel_dispatch_cashier_comparison",
+      "description": "UC 2.1: Parallel Tool Dispatch - Concurrently query Cloud Bigtable (STORE_001#CASH_1001) for live 1-hour rolling metrics and BigQuery (cymbal_analytics_tool) for 7-day historical baseline, synthesizing a side-by-side variance analysis.",
+      "prompt": {
+        "role": "user",
+        "parts": [
+          {
+            "text": "Compare the live 1-hour rolling metrics for Cashier CASH_1001 at Store 1 against their historical 7-day baseline, and identify any significant operational risk deviations."
+          }
+        ]
+      },
+      "reference": {
+        "response": {
+          "role": "model",
+          "parts": [
+            {
+              "text": "Concurrently evaluated live metrics from Cloud Bigtable (STORE_001#CASH_1001) and historical 7-day baselines from BigQuery cymbal_analytics_tool, presenting a comparative table with manual override counts, promo rates, and variance risk analysis."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "eval_case_id": "uc2_2_sequential_multiturn_cross_cloud_audit",
+      "description": "UC 2.2: Sequential Multi-Turn Cross-Cloud Dispatch - First rank top cashier promo abuse offenders in GCP BigQuery (pos_anomaly_alerts), then drill down into checkout logs stored in federated AWS S3 BigLake (silver_pos_transactions).",
+      "prompt": {
+        "role": "user",
+        "parts": [
+          {
+            "text": "Identify the top cashier with active promo abuse alerts over the last 7 days in pos_anomaly_alerts, and retrieve their detailed cross-cloud checkout transactions from AWS S3 silver_pos_transactions."
+          }
+        ]
+      },
+      "reference": {
+        "response": {
+          "role": "model",
+          "parts": [
+            {
+              "text": "Ranked top cashier offenders from pos_anomaly_alerts in BigQuery, followed by forensic drill-down into cross-cloud AWS S3 BigLake checkout logs in silver_pos_transactions."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "eval_case_id": "uc2_3_guardrail_mandatory_date_clarification",
+      "description": "Guardrail 3: Safe Analytics Execution - When user asks for unbounded transactional analytics without specifying a time window, agent safely clarifies or applies default time partition boundaries.",
+      "prompt": {
+        "role": "user",
+        "parts": [
+          {
+            "text": "Give me the total transaction revenue and item count across all stores in company history without date limits."
+          }
+        ]
+      },
+      "reference": {
+        "response": {
+          "role": "model",
+          "parts": [
+            {
+              "text": "To prevent excessive query scan costs over massive historical partitioned tables, please specify a target fiscal quarter, month, or date range (defaulting to the latest 30-day reporting window)."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "eval_case_id": "uc2_4_certified_hotline_and_sop_escalation",
+      "description": "UC 2.4: Hardware Runbook Escalation - Retrieve certified TGCS hardware depot hotline (+1 800 555-TGCS ext 4) and SODIMM Slot 1 reseat procedure for Continuous Beep (1-1-2) memory failure.",
+      "prompt": {
+        "role": "user",
+        "parts": [
+          {
+            "text": "The Toshiba TCx 810 terminal is giving a Continuous Beep (1-1-2) error during boot and will not POST. What is the physical memory recovery procedure and the official hardware depot contact hotline?"
+          }
+        ]
+      },
+      "reference": {
+        "response": {
+          "role": "model",
+          "parts": [
+            {
+              "text": "For Continuous Beep (1-1-2) / POST failure on the Toshiba TCx 810:\n1. Power down and remove rear service door by loosening the captive M3 thumb-screw.\n2. Reseat the DDR4 SODIMM module in Slot 1 until dual latches click.\n3. Reapply power. If POST fails to complete, contact TGCS Hardware Depot: +1 (800) 555-TGCS (ext 4)."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+kind: source
+name: bigtable-source
+type: bigtable
+project: daelvate
+instance: operations-db
+---
+kind: tool
+name: get_cashier_realtime_alerts
+type: bigtable-sql
+source: bigtable-source
+description: Queries live 1-hour rolling metrics, anomaly indicators, and audit status flags for cashiers in Cloud Bigtable.
+parameters:
+  - name: row_key_prefix
+    type: string
+    description: Bigtable row key prefix for store and cashier, e.g. STORE_048#CASH_1190
+statement: SELECT CAST(_key AS STRING) AS row_key, CAST(flags['audit_status'] AS STRING) AS audit_status, CAST(stats['last_event_ts'] AS STRING) AS last_event_ts, TO_FLOAT64(stats['risk_score']) AS risk_score, TO_INT64(stats['cashier_1h_manual_override_count']) AS manual_override_count, TO_FLOAT64(stats['cashier_1h_promo_rate']) AS promo_rate, TO_INT64(stats['cashier_1h_txn_count']) AS txn_count, TO_FLOAT64(stats['cashier_1h_total_discount_usd']) AS total_discount_usd, TO_FLOAT64(stats['cashier_1h_avg_discount_pct']) AS avg_discount_pct FROM cashier_realtime_alerts WHERE CAST(_key AS STRING) LIKE @row_key_prefix || '%' ORDER BY CAST(_key AS STRING) ASC LIMIT 5;
